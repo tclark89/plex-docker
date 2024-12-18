@@ -1,0 +1,25 @@
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/Chicago
+      - PLEX_UID=998
+      - PLEX_GID=998
+    network_mode: host
+    volumes:
+      - /srv/plex:/config
+      - /mnt/RAID/public:/mnt/RAID/public
+      - /mnt/RAID/tyler:/mnt/RAID/tyler
+
+  pasta:
+    image: cglatot/pasta
+    container_name: pasta
+    depends_on:
+      plex:
+        condition: service_healthy
+        restart: true
+    ports:
+      - 8087:80
+    restart: unless-stopped

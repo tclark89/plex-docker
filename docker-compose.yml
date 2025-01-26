@@ -9,17 +9,18 @@ services:
       - PLEX_GID=998
     network_mode: host
     volumes:
-      - /srv/plex:/config
-      - /mnt/public:/mnt/RAID/public
-      - /mnt/tyler:/mnt/RAID/tyler
+      - plex-config:/config
+      - mnt-public:/mnt/RAID/public
+      - mnt-tyler:/mnt/RAID/tyler
 
-  pasta:
-    image: cglatot/pasta
-    container_name: pasta
-    depends_on:
-      plex:
-        condition: service_healthy
-        restart: true
-    ports:
-      - 8087:80
-    restart: unless-stopped
+
+volumes:
+  plex-config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=fileserver.localdomain.lan,rw,vers=4.1
+      device: ":/srv/docker/plex"
+  mnt-public:
+  mnt-tyler:
+

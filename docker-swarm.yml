@@ -1,18 +1,21 @@
 services:
-  plex:
-    container_name: plex
+  app:
     image: plexinc/pms-docker:latest
-    restart: unless-stopped
     environment:
       - TZ=America/Chicago
       - PLEX_UID=998
       - PLEX_GID=998
-    network_mode: host
+    networks:
+      - outside
     volumes:
       - plex-config:/config
       - mnt-public:/mnt/RAID/public
       - mnt-tyler:/mnt/RAID/tyler
 
+networks:
+  outside:
+    external: true
+    name: host
 
 volumes:
   plex-config:
@@ -22,5 +25,7 @@ volumes:
       o: addr=fileserver.localdomain.lan,rw,vers=4.1
       device: ":/srv/docker/plex"
   mnt-public:
+    external: true
   mnt-tyler:
+    external: true
 

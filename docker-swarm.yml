@@ -11,6 +11,7 @@ services:
       - plex-config:/config
       - mnt-public:/mnt/RAID/public
       - mnt-tyler:/mnt/RAID/tyler
+      - /mnt/transcode:/transcode
 
 networks:
   outside:
@@ -22,8 +23,8 @@ volumes:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=fileserver.tyler-clark.com,rw,vers=4.1
-      device: ":/srv/docker/plex"
+      o: addr=192.168.10.10,rw,vers=4.1
+      device: ":/srv/docker/plex-docker/plex-config"
   mnt-public:
     external: true
   mnt-tyler:

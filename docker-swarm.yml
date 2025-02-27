@@ -8,7 +8,8 @@ services:
     networks:
       - outside
     volumes:
-      - plex-config:/config
+      - ./DBRepair.sh:/DBRepair.sh
+      - config:/config
       - mnt-public:/mnt/RAID/public
       - mnt-tyler:/mnt/RAID/tyler
       - /mnt/transcode:/transcode
@@ -19,12 +20,12 @@ networks:
     name: host
 
 volumes:
-  plex-config:
+  config:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=192.168.10.10,rw,vers=4.1
-      device: ":/srv/docker/plex-docker/plex-config"
+      o: addr=192.168.10.20,rw,vers=4.1
+      device: ":/mnt/docker/plex-docker/config"
   mnt-public:
     external: true
   mnt-tyler:

@@ -4,8 +4,8 @@ services:
     image: plexinc/pms-docker:latest
     environment:
       - TZ=America/Chicago
-      - PLEX_UID=998
-      - PLEX_GID=998
+      - PLEX_UID=1000
+      - PLEX_GID=1000
     network_mode: host 
     volumes:
       - ./DBRepair.sh:/DBRepair.sh

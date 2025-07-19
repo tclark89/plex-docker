@@ -1,0 +1,31 @@
+services:
+  plex:
+    restart: always
+    image: plexinc/pms-docker:latest
+    environment:
+      - TZ=America/Chicago
+      - PLEX_UID=998
+      - PLEX_GID=998
+    network_mode: host 
+    volumes:
+      - ./DBRepair.sh:/DBRepair.sh
+      - ./config:/config
+      - mnt-public:/mnt/RAID/public
+      - mnt-tyler:/mnt/RAID/tyler
+      - ./transcode:/transcode
+    devices:
+      - /dev/dri:/dev/dri
+
+
+volumes:
+  #config:
+  #  driver: local
+  #  driver_opts:
+  #    type: nfs
+  #    o: addr=192.168.10.20,rw,vers=4.1
+  #    device: ":/mnt/docker/plex-docker/config"
+  mnt-public:
+    external: true
+  mnt-tyler:
+    external: true
+

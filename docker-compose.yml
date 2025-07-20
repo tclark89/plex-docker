@@ -1,5 +1,6 @@
 services:
   plex:
+    container_name: plex
     restart: unless-stopped
     image: plexinc/pms-docker:latest
     environment:
@@ -14,6 +15,20 @@ services:
       - mnt-tyler:/mnt/RAID/tyler
       - ./transcode:/transcode
       - /dev/dri:/dev/dri
+
+  tautulli:
+    container_name: tautulli
+    restart: unless-stopped
+    image: ghcr.io/tautulli/tautulli
+    volumes:
+      - ./config-tautulli:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    ports:
+      - 8181:8181
+
   pasta:
     image: cglatot/pasta
     container_name: pasta

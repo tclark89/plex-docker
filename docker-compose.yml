@@ -1,6 +1,6 @@
 services:
   plex:
-    restart: always
+    restart: unless-stopped
     image: plexinc/pms-docker:latest
     environment:
       - TZ=America/Chicago
@@ -14,6 +14,12 @@ services:
       - mnt-tyler:/mnt/RAID/tyler
       - ./transcode:/transcode
       - /dev/dri:/dev/dri
+  pasta:
+    image: cglatot/pasta
+    container_name: pasta
+    ports:
+      - 8087:80
+    restart: unless-stopped
 
 
 volumes:

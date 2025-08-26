@@ -11,9 +11,12 @@ services:
     volumes:
       - ./DBRepair.sh:/DBRepair.sh
       - ./config:/config
+      #- /mnt/public:/mnt/RAID/public
+      #- /mnt/tyler:/mnt/RAID/tyler
       - mnt-public:/mnt/RAID/public
       - mnt-tyler:/mnt/RAID/tyler
       - ./transcode:/transcode
+      #- /dev/shm:/transcode
       - /dev/dri:/dev/dri
 
   tautulli:

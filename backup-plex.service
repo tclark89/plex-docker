@@ -3,7 +3,7 @@ Description="Backup Plex config to fileserver"
 
 [Service]
 Type=oneshot
-ExecStart=rsync -avh --delete  --exclude=transcode /home/plex/plex-docker/ fileserver@fileserver.tyler-clark.com:/mnt/docker/plex-docker/
+ExecStart=rsync -avh --delete  --exclude=transcode /home/plex/plex-docker/ tyler@fileserver.tyler-clark.com:/srv/docker/plex-docker/
 
 [Install]
 WantedBy=multi-user.target
